@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  up-server:
+    build:
+      context: ./
+      dockerfile: iperf3/Dockerfile
+    container_name: "iperf3-ip"
+    ports:
+      - "50001:5001/tcp"
+      - "50001:5001/udp"
+    networks:
+      - public 
+      - private 
+    dns_search: .
+    command: iperf3 -s -V -d -p 5001
+    tty:
+      true
+
+  down-server:
+    build:
+      context: ./
+      dockerfile: iperf3/Dockerfile
+    container_name: "iperf3-down"
+    ports:
+      - "50002:5001/tcp"
+      - "50002:5001/udp"
+    networks:
+      - public
+      - private
+    dns_search: .
+    command: iperf3 -s -V -d -p 5001
+    tty:
+      true
+
+networks:
+  public:
+    driver: bridge
+  private:
+    driver: bridge
