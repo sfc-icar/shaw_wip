@@ -12,10 +12,6 @@ services:
     networks:
       - public 
       - private 
-    dns_search: .
-    command: 
-    tty:
-      true
   
   dtn-server-2:
     build:
@@ -28,10 +24,6 @@ services:
     networks:
       - public 
       - private 
-    dns_search: .
-    command: 
-    tty:
-      true
 
 networks:
   public:
