@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  up-server:
+  dtn-server-1:
     build:
       context: ./
-      dockerfile: iperf3/Dockerfile
-    container_name: "iperf3-ip"
+      dockerfile: dockerfile/Dockerfile
+    container_name: "dtn1"
     ports:
       - "50001:5001/tcp"
       - "50001:5001/udp"
@@ -13,23 +13,23 @@ services:
       - public 
       - private 
     dns_search: .
-    command: iperf3 -s -V -d -p 5001
+    command: 
     tty:
       true
-
-  down-server:
+  
+  dtn-server-2:
     build:
       context: ./
-      dockerfile: iperf3/Dockerfile
-    container_name: "iperf3-down"
+      dockerfile: dockerfile/Dockerfile
+    container_name: "dtn2"
     ports:
       - "50002:5001/tcp"
       - "50002:5001/udp"
     networks:
-      - public
-      - private
+      - public 
+      - private 
     dns_search: .
-    command: iperf3 -s -V -d -p 5001
+    command: 
     tty:
       true
 
